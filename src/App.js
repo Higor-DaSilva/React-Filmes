@@ -1,16 +1,15 @@
 //chamar as telas do index.js
 import './App.css';
 import CadastroFilme from './pages/cadastroFilme/CadastroFilme';
-
 // import Login from './pages/login/Login';
 
 function App() {
   return (
     <>
-     <CadastroFilme/>
+     {/* Chamar as páginas */}
      {/* // <Login/> */}
+     <CadastroFilme/>
     </>
-   
 
   );
 }
