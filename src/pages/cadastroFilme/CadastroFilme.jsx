@@ -4,15 +4,18 @@ import Header from "../../components/header/Header";
 import Cadastro from "../../components/cadastro/Cadastro";
 import Lista from "../../components/lista/Lista";
 
-
-
 const CadastroFilme = () => {
     return(
         <>
          <Header/>
          <main>
-            <Cadastro/>
-            <Lista/>
+            <Cadastro 
+            tituloCadastro="Cadastro de Filme"
+            campoPlaceholder="Filme"
+            />
+            <Lista 
+            nomeLista="Lista de Filme"
+            />
           </main>
          <Footer/>
         </>

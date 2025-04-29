@@ -1,14 +1,13 @@
 //chamar as telas do index.js
+import { Route } from 'react-router-dom';
 import './App.css';
-import CadastroFilme from './pages/cadastroFilme/CadastroFilme';
-// import Login from './pages/login/Login';
+import Rotas from "./Routes/routes"
+
 
 function App() {
   return (
     <>
-     {/* Chamar as páginas */}
-     {/* // <Login/> */}
-     <CadastroFilme/>
+    <Rotas/>
     </>
 
   );

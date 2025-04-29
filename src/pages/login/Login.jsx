@@ -16,18 +16,18 @@ const Login = () => {
                     <div className="campos_login">
                         <div className="campo_imput">
                             <label htmlFor="email">Email</label>
-                            <input type="email" name="email" />
+                            <input type="email" name="email" placeholder="exemplo@email.com"/>
 
                         </div>
                         <div className="campo_imput">
 
                             <label htmlFor="senha">Senha</label>
-                            <input type="password" name="senha" />
+                            <input type="password" name="senha" placeholder="*********" />
 
 
                         </div>
                     </div>
-                    <Botao/>
+                    <Botao nomeDoBotao="Entrar 😁"/>
                 </form>
             </section>
         </main>
