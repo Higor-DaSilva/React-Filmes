@@ -3,7 +3,7 @@
     header: 75px
     cadastro: 252px
     footer: 40px */
-    height: calc(100vh - (75px + 252px +  40px));
+    min-height: calc(100vh - (75px + 252px +  40px));
 
     display: flex;
     flex-direction: column;
