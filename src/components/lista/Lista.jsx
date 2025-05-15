@@ -46,7 +46,7 @@ const Lista = (props) => {
                                         <img
                                             src={Excluir}
                                             alt="Lixeira"
-                                            onClick={() => props.excluirGenero(item.idGenero)}
+                                            onClick={() => (props.excluirGenero(item))}
                                         />
                                     </td>
                                 </tr>

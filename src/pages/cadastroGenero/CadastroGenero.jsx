@@ -68,9 +68,9 @@ const CadastroGenero = () => {
     }
     
     //criar função de excluir o genero
-    async function excluirGenero(id) {
+    async function excluirGenero(generoId) {
         try {
-            await api.delete(`genero/${id}`);
+            await api.delete(`genero/${generoId.idGenero}`);
             alerta("success", "Gênero excluído!");
             // Atualiza a lista após exclusão
         } catch (error) {
@@ -87,7 +87,7 @@ const CadastroGenero = () => {
         //assim que a página renderizar, o método listarGenero() será chamado
         useEffect(() => {
             listarGenero();
-        }, [])
+        }, [genero])
     
     return (
         <>
