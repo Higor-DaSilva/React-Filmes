@@ -68,7 +68,7 @@ const CadastroGenero = () => {
             console.log(error);
         }
     }
-    
+
     //criar função de excluir o genero
     async function excluirGenero(generoId) {
         Swal.fire({
@@ -92,15 +92,36 @@ const CadastroGenero = () => {
     }
     listarGenero();
 
-    function editarGenero(){
-        alert("clicouuu")
+    async function editarGenero(genero) {
+        //console.log(genero);
+        const { value: novoGenero } = await Swal.fire({
+            title: "Modifique o gênero",
+            input: "text",
+            inputLabel: "Novo gênero",
+            inputValue: genero.nome,
+            showCancelButton: true,
+            inputValidator: (value) => {
+                if (!value) {
+
+                    return "O campo precisa ser preenchido!";
+                }
+            }
+        });
+        if (novoGenero) {
+                try {
+                        api.put(`genero/${genero.idGenero}`, {nome: novoGenero});
+                        Swal.fire(`O gênero modificado ${novoGenero}`);
+                    } catch (error) {
+                        console.log(error);
+                    }
+        }
     }
-    
-        //assim que a página renderizar, o método listarGenero() será chamado
-        useEffect(() => {
-            listarGenero();
-        }, [genero])
-    
+
+    //assim que a página renderizar, o método listarGenero() será chamado
+    useEffect(() => {
+        listarGenero();
+    }, [genero])
+
     return (
         <>
             <Header />

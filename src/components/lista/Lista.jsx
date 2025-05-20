@@ -34,18 +34,18 @@ const Lista = (props) => {
                     </thead>
                     {/* tbody => Corpo da Tabela */}
                     <tbody >
-                          {listaPaginada && listaPaginada.length > 0 ? (
+                        {listaPaginada && listaPaginada.length > 0 ? (
                             listaPaginada.map((item) => (
-                                 <tr className="item_lista" key={item.idGenero}>
+                                <tr className="item_lista" key={item.idGenero}>
                                     <td data-cell="Nome">
                                         {item.nome}
                                     </td>
                                     <td data-cell="Gênero" style={{ display: props.visi_lista }}> Terror </td>
                                     <td data-cell="Editar">
                                         <img
-                                            src={Editar} 
+                                            src={Editar}
                                             alt="caneta"
-                                            onClick={props.editarGenero}
+                                            onClick={() => (props.editarGenero(item))}
                                         />
                                     </td>
                                     <td data-cell="Excluir">
@@ -65,7 +65,7 @@ const Lista = (props) => {
                     </tbody>
                 </table>
             </div>
-             {/* Paginação */}
+            {/* Paginação */}
             {props.lista && props.lista.length > itensPorPagina && (
                 <div className="paginacao" style={{ marginTop: '1rem', textAlign: 'center' }}>
                     <button onClick={() => setPaginaAtual(prev => Math.max(prev - 1, 1))} disabled={paginaAtual === 1}>
