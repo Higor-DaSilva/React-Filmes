@@ -12,12 +12,12 @@ import Lista from "../../components/lista/Lista";
 
 const CadastroGenero = () => {
 
-    //nome do genero
+    //Só criamos 
     const [genero, setGenero] = useState("");
     const [listaGenero, setListaGenero] = useState([]);
 
 
-    function alerta(icone, mesagem) {
+    function alertar(icone, mesagem) {
         const Toast = Swal.mixin({
             toast: true,
             position: "top-end",
@@ -44,15 +44,17 @@ const CadastroGenero = () => {
             try {
                 //cadastrar um gènero: post
                 await api.post("genero", { nome: genero });
-                alerta("success", "Cadastro realizado com sucesso")
+                alertar("success", "Cadastro realizado com sucesso")
                 setGenero("");
+                //atualizar a minha lista assim que cadastrarm um novo gênero
+                listarGenero();
             } catch (error) {
 
-                alerta("error", "Erro! entre em contato com o suporte!")
+                alertar("error", "Erro! entre em contato com o suporte!")
                 console.log(error);
             }
         } else {
-            alerta("warning", "Preencha o campo")
+            alertar("warning", "Preencha o campo")
         }
     }
 
@@ -69,17 +71,27 @@ const CadastroGenero = () => {
     
     //criar função de excluir o genero
     async function excluirGenero(generoId) {
-        try {
-            await api.delete(`genero/${generoId.idGenero}`);
-            alerta("success", "Gênero excluído!");
-            // Atualiza a lista após exclusão
-        } catch (error) {
-            alerta("error", "Erro ao excluir gênero.");
+        Swal.fire({
+            title: 'Tem certeza?',
+            text: "Você não poderá desfazer esta ação!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, apagar!',
+            cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                api.delete(`genero/${generoId.idGenero}`);
+                alertar("success", "Gênero Excluido!")
+            }
+        }).catch(error => {
             console.log(error);
-        }
-        listarGenero();
+            alertar("error", "Erro ao Excluir!");
+        });
     }
-    
+    listarGenero();
+
     function editarGenero(){
         alert("clicouuu")
     }

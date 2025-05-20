@@ -3,8 +3,17 @@ import "./Lista.css";
 // Importação de imagens:
 import Editar from "../../assets/img/pen-to-square-solid.svg";
 import Excluir from "../../assets/img/trash-can-regular.svg";
+import React, { useState } from 'react';
 
 const Lista = (props) => {
+
+    const itensPorPagina = 5;
+    const [paginaAtual, setPaginaAtual] = useState(1);
+
+    const totalPaginas = Math.ceil((props.lista?.length || 0) / itensPorPagina);
+    const inicio = (paginaAtual - 1) * itensPorPagina;
+    const listaPaginada = props.lista?.slice(inicio, inicio + itensPorPagina);
+
     return (
         <section className="layout_grid listagem">
             <h1>{props.nomeLista}</h1>
@@ -25,12 +34,9 @@ const Lista = (props) => {
                     </thead>
                     {/* tbody => Corpo da Tabela */}
                     <tbody >
-                        {/*Verificar se a lista está vazia */}
-                        {props.lista && props.lista.length > 0 ? (
-                            //vamos mapear os intens da lista
-                            props.lista.map((item) => (
-                                //dando um identificador ára cada linha da lista
-                                <tr className="item_lista" key={item.idGenero}>
+                          {listaPaginada && listaPaginada.length > 0 ? (
+                            listaPaginada.map((item) => (
+                                 <tr className="item_lista" key={item.idGenero}>
                                     <td data-cell="Nome">
                                         {item.nome}
                                     </td>
@@ -51,15 +57,30 @@ const Lista = (props) => {
                                     </td>
                                 </tr>
                             ))
-
                         ) : (
-                            <p>Nenhum gênero foi encontrado.</p>
-                        )
-
-                        }
+                            <tr>
+                                <td colSpan="4">Nenhum gênero foi encontrado.</td>
+                            </tr>
+                        )}
                     </tbody>
                 </table>
             </div>
+             {/* Paginação */}
+            {props.lista && props.lista.length > itensPorPagina && (
+                <div className="paginacao" style={{ marginTop: '1rem', textAlign: 'center' }}>
+                    <button onClick={() => setPaginaAtual(prev => Math.max(prev - 1, 1))} disabled={paginaAtual === 1}>
+                        ←
+                    </button>
+
+                    <span style={{ margin: '0 1rem' }}>
+                        Página {paginaAtual} de {totalPaginas}
+                    </span>
+
+                    <button onClick={() => setPaginaAtual(prev => Math.min(prev + 1, totalPaginas))} disabled={paginaAtual === totalPaginas}>
+                        →
+                    </button>
+                </div>
+            )}
         </section>
     )
 }
